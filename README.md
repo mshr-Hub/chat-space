@@ -1,53 +1,24 @@
-# DB設計
+# README
 
-## usersテーブル
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-|Column|Type|Options|
-|------|----|-------|
-|name|string|index: true, null: false, unique: true|
-|mail|string|null: false|
+Things you may want to cover:
 
-### Association
--has_many :messages
--has_many :members
--has_many :groups, through: :members
+* Ruby version
 
+* System dependencies
 
-## messagesテーブル
+* Configuration
 
-|Column|Type|Options|
-|------|----|-------|
-|body|text|index: ture, null: false|
-|image|string||
-|user_id|integer|null: false, foreign_key: true|
-|group_id|integer|null: false, foreign_key: true|
+* Database creation
 
-### Association
--belongs_to :user
--belongs_to :group
+* Database initialization
 
+* How to run the test suite
 
-##groupsテーブル
+* Services (job queues, cache servers, search engines, etc.)
 
-|Column|Type|Options|
-|------|----|-------|
-|group_name|string|index: true, null: false|
-|user_id|integer|null: false, foreign_key: true|
-|message_id|integer|null: false, foreign_key: true|
+* Deployment instructions
 
-### Association
--has_many :messages
--has_many :members
--has_many :users, through: :members
-
-
-## membersテーブル
-
-|Column|Type|Options|
-|------|----|-------|
-|user_id|integer|null: false, foreign_key: true|
-|group_id|integer|null: false, foreign_key: true|
-
-### Association
-- belongs_to :group
-- belongs_to :user
+* ...
