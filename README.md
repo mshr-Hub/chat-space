@@ -32,7 +32,6 @@
 |Column|Type|Options|
 |------|----|-------|
 |name|string|index: true, null: false|
-|user_id|integer|null: false, foreign_key: true|
 
 ### Association
 - has_many :messages
