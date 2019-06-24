@@ -1,0 +1,31 @@
+.chat-side {
+  width: 300px;
+  color: #FFF;
+  float: left;
+}
+
+.chat-side a {
+  color: #FFF;
+}
+
+.side-header {
+  background-color: #253141;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  &__box {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-weight: bold;
+  &__menu {
+    display: flex;
+    list-style: none;
+    }
+  &__menu li {
+    margin-left: 0.3rem;
+    display: list-item;
+  }
+  }
+}
