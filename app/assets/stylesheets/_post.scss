@@ -94,3 +94,32 @@ a {
   }
 }
 
+.messages {
+  height: calc(100vh - 190px);
+  padding: 46px 40px;
+  background-color: #fafafa;
+  overflow: scroll;
+}
+
+.message {
+  padding-bottom: 40px;
+  &__upper-info {
+    display: flex;
+    margin-bottom: 10px;
+    &__talker {
+      color: #434a54;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    &__date {
+      color: #999;
+      font-size: 12px;
+      margin-left: 10px;
+    }
+  }
+  &__text {
+    color: #434a54;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+}
