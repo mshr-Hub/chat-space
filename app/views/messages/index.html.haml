@@ -11,18 +11,8 @@
           =link_to "#" do
             =fa_icon 'cog'
   .groups
-    =link_to "#" do
-      .group
-        %p.group__group-name
-          test-group
-        %p.group__latest-message
-          hello!
-    =link_to "#" do
-      .group
-        %p.group__group-name
-          test-group
-        %p.group__latest-message
-          hello!
+    = render 'group'
+    = render 'group'
 
 .chat-main
   .main-header
@@ -37,22 +27,8 @@
       .main-header__edit-btn
         Edit
   .messages
-    .message
-      .message__upper-info
-        %p.message__upper-info__talker
-          sample
-        %p.message__upper-info__date
-          sample-date
-      %p.message__text
-        hello!
-    .message
-      .message__upper-info
-        %p.message__upper-info__talker
-          sample
-        %p.message__upper-info__date
-          sample-date
-      %p.message__text
-        hello!
+    = render 'message'
+    = render 'message'
   .form
     %form#new_message.new_message{"accept-charset" => "UTF-8", :action => "#", :enctype => "multipart/form-data", :method => "post"}
       -# %input{:name => "utf8", :type => "hidden", :value => "✓"}/
