@@ -1,0 +1,39 @@
+.chat-side
+  .side-header
+    .side-header__box
+      %p.side-header__box__user-name
+        sample
+      %ul.side-header__box__menu
+        %li.side-header__box__menu-new-group
+          = link_to "#" do
+            = fa_icon 'edit'
+        %li.side-header__box__menu-edit-user
+          = link_to "#" do
+            = fa_icon 'cog'
+  .groups
+    = render 'group'
+    = render 'group'
+
+.chat-main
+  .main-header
+    .main-header__left-box
+      %h2.main-header__left-box__current-group
+        test-group
+      %ul.main-header__left-box__member-list
+        Member：
+        %li.main-header__left-box__member-list__member
+          sample
+    = link_to "#" do
+      .main-header__edit-btn
+        Edit
+  .messages
+    = render 'message'
+    = render 'message'
+  .form
+    %form#new_message.new_message{"accept-charset": "UTF-8", action: "#", enctype: "multipart/form-data", method: "post"}
+      .input-box
+        %input#message_content.input-box__text{name: "message[content]", placeholder: "type a message", type: "text"}
+        %label.input-box__image{for: "message_image"}
+          = fa_icon "image"
+          %input#message_image.input-box__image__file{name: "message[image]", type: "file"}
+      %input.submit-btn{name: "commit", type: "submit", value: "Send"}
