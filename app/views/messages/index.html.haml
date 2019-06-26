@@ -31,8 +31,6 @@
     = render 'message'
   .form
     %form#new_message.new_message{"accept-charset": "UTF-8", action: "#", enctype: "multipart/form-data", method: "post"}
-      -# %input{:name => "utf8", :type => "hidden", :value => "✓"}/
-      -# %input{:name => "authenticity_token", :type => "hidden", :value => "#"}/
       .input-box
         %input#message_content.input-box__text{name: "message[content]", placeholder: "type a message", type: "text"}
         %label.input-box__image{for: "message_image"}
