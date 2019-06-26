@@ -2,7 +2,7 @@
   .side-header
     .side-header__box
       %p.side-header__box__user-name
-        sample
+        = current_user.name
       %ul.side-header__box__menu
         %li.side-header__box__menu-new-group
           = link_to "#" do
