@@ -11,14 +11,7 @@
       .main-header__edit-btn
         Edit
   .messages
-    .message
-      .message__upper-info
-        %p.message__upper-info__talker
-          sample
-        %p.message__upper-info__date
-          sample-date
-      %p.message__text
-        hello!
+    = render partial: 'shared/message', collection: @messages
   .form
     = form_for [@group, @message], class: "new_message", id: "new_message", enctype: "multipart/form_data" do |f|
       .input-box
