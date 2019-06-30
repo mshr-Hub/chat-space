@@ -20,10 +20,10 @@
       %p.message__text
         hello!
   .form
-    %form#new_message.new_message{"accept-charset": "UTF-8", action: "#", enctype: "multipart/form-data", method: "post"}
+    = form_for [@group, @message], class: "new_message", id: "new_message", enctype: "multipart/form_data" do |f|
       .input-box
-        %input#message_content.input-box__text{name: "message[content]", placeholder: "type a message", type: "text"}
-        %label.input-box__image{for: "message_image"}
+        = f.text_field :content, class: "input-box__text", id: "message_content", placeholder: "type a message"
+        = f.label :image, class: "input-box__image", for: "message_image" do
           = fa_icon "image"
-          %input#message_image.input-box__image__file{name: "message[image]", type: "file"}
-      %input.submit-btn{name: "commit", type: "submit", value: "Send"}
+          = f.file_field :image, class: "input-box__image__file hidden", id: "message_image"
+      = f.submit "Send", class: "submit-btn"
