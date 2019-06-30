@@ -6,5 +6,10 @@ class Group < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   def show_last_message
-  end
+    if (last_message = message.last).present?
+    
+    else
+      'まだメッセージはありません。'
+    end
+
 end
