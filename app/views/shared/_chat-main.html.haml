@@ -2,23 +2,17 @@
   .main-header
     .main-header__left-box
       %h2.main-header__left-box__current-group
-        test-group
+        = @group.name
       %ul.main-header__left-box__member-list
         Member：
-        %li.main-header__left-box__member-list__member
-          sample
+        - @group.users.each do |member|
+          %li.main-header__left-box__member-list__member
+            = member.name
     = link_to edit_group_path(@group) do
       .main-header__edit-btn
         Edit
   .messages
-    .message
-      .message__upper-info
-        %p.message__upper-info__talker
-          sample
-        %p.message__upper-info__date
-          sample-date
-      %p.message__text
-        hello!
+    = render partial: 'shared/message', collection: @messages
   .form
     = form_for [@group, @message], class: "new_message", id: "new_message", enctype: "multipart/form_data" do |f|
       .input-box
