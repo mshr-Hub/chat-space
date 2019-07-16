@@ -8,10 +8,11 @@ class MessagesController < ApplicationController
 
   def create
     @message = @group.messages.new(message_params)
-    @message.save
-    respond_to do |format|
-      format.html
-      format.json
+    if @message.save
+      respond_to do |format|
+        format.html
+        format.json
+      end
     end
     # if @message.save
     #   redirect_to group_messages_path(@group), notice: 'メッセージが送信されました'
