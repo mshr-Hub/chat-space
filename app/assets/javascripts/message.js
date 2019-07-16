@@ -1,7 +1,7 @@
 $(function() {
   function buildHTML(message) {
     var content = message.content ? `${message.content}` : "";
-    var img = message.image ? `<img src=${message.image}>` : "";
+    var img = message.image ? `<img class="message__image" src=${message.image}>` : "";
     var html = `<div class="message">
                   <div class="message__upper-info">
                     <p class="message__upper-info__talker">
@@ -17,6 +17,13 @@ $(function() {
                   </p>
                 </div>`
     return html;
+  }
+  function scrollBottom() {
+    var target = $('.message').last();
+    var position = target.offset().top + $('.messages').scrollTop();
+    $('.messages').animate({
+      scrollTop: position
+    }, 300, 'swing');
   }
   $('#new_message').on("submit", function(e) {
     e.preventDefault();
@@ -34,9 +41,7 @@ $(function() {
       var html = buildHTML(data);
       $('.messages').append(html);
       $('#message_content').val('');
-    })
-    .fail(function() {
-      alert('メッセージの送信に失敗しました');
+      scrollBottom();
     })
   })
 });
