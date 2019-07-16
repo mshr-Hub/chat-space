@@ -13,8 +13,8 @@ $(function() {
                   </div>
                   <p class="message__text">
                     ${content}
-                    ${img}
                   </p>
+                  ${img}
                 </div>`
     return html;
   }
