@@ -43,6 +43,9 @@ $(function() {
       $('#message_content').val('');
       scrollBottom();
     })
+    .fail(function(data) {
+      alert('メッセージを入力してください。');
+    })
     .always(function(data) {
       $('.submit-btn').prop('disabled', false);
     })
