@@ -43,5 +43,8 @@ $(function() {
       $('#message_content').val('');
       scrollBottom();
     })
+    .always(function(data) {
+      $('.submit-btn').prop('disabled', false);
+    })
   })
 });
