@@ -10,6 +10,13 @@ $(function() {
     user_search_result.append(html);
   }
 
+  function appendErrMsgToHTML(msg) {
+    var html = `<div class="chat-group-user clearfix">
+                  <p class="chat-group-user__name">${msg}</p>
+                </div>`
+    user_search_result.append(html);
+  }
+
   $('#user-search-field').on("keyup", function() {
     var input = $('#user-search-field').val();
     $.ajax({
@@ -26,7 +33,7 @@ $(function() {
         });
       }
       else {
-        appendErrMsgToHTML("一致するユーザーが存在しません");
+        appendErrMsgToHTML("一致するユーザーが見つかりません");
       }
     })
     .fail(function() {
