@@ -19,6 +19,7 @@ $(function() {
 
   $('#user-search-field').on("keyup", function() {
     var input = $('#user-search-field').val();
+    var lastInput = '';
     $.ajax({
       type: 'GET',
       url: '/users/index',
@@ -27,14 +28,18 @@ $(function() {
     })
     .done(function(users) {
       $("#user-search-result").empty();
-      if (users.length !== 0) {
+      if (lastInput !== input && users.length !== 0) {
         users.forEach(function(user) {
           appendUser(user);
         });
       }
+      else if (lastInput == input) {
+        $("#user-search-result").empty();
+      }
       else {
         appendErrMsgToHTML("一致するユーザーが見つかりません");
       }
+      lastInput == input;
     })
     .fail(function() {
       alert('ユーザー検索に失敗しました');
