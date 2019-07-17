@@ -40,7 +40,7 @@ $(function() {
     .done(function(data) {
       var html = buildHTML(data);
       $('.messages').append(html);
-      $('#message_content').val('');
+      $('#new_message')[0].reset();
       scrollBottom();
     })
     .fail(function(data) {
