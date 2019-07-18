@@ -35,14 +35,14 @@ $(function() {
       dataType: 'json'
     })
     .done(function(users) {
-      $("#user-search-result").empty();
+      user_search_result.empty();
       if (lastInput !== input && users.length !== 0) {
         users.forEach(function(user) {
           appendUser(user);
         });
       }
       else if (lastInput == input) {
-        $("#user-search-result").empty();
+        user_search_result.empty();
       }
       else {
         appendErrMsgToHTML("一致するユーザーが見つかりません");
@@ -53,7 +53,9 @@ $(function() {
       alert('ユーザー検索に失敗しました');
     })
   });
-  $('#user-search-result').on('click', '.user-search-add', function() {
-    $('#user-search-result').empty();
+  user_search_result.on('click', '.user-search-add', function(e) {
+    var user = $(e.currentTarget).data();
+    user_search_result.empty();
+    appendChatUser(user);
   });
 });
