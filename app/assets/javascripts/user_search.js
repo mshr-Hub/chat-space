@@ -58,4 +58,8 @@ $(function() {
     user_search_result.empty();
     appendChatUser(user);
   });
+  chat_group_users.on('click', '.user-search-remove', function(e) {
+    var remove_member = $(e.currentTarget).parent();
+    remove_member.remove();
+  });
 });
