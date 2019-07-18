@@ -24,16 +24,16 @@
     .chat-group-form__field--right
       #chat-group-users
         %div{ class: "chat-group-user clearfix js-chat-member", id: "#{current_user.id}" }
-          = f.hidden_field :user_ids, value: current_user.id
+          = f.hidden_field :user_ids, value: current_user.id, multiple: true
           %p.chat-group-user__name
             = current_user.name
         - group.users.each do |user|
           - next if user.id == current_user.id
           %div{ class: "chat-group-user clearfix js-chat-member", id: "chat-group-user-#{user.id}" }
-            = f.hidden_field :user_ids, value: user.id
+            = f.hidden_field :user_ids, value: user.id, multiple: true
             %p.chat-group-user__name
               = user.name
-            .user-search-remove.chat-group-user__btn.chat-group-user__btn--remove.js-remove-btn 削除
+            .user-search-remove.chat-group-user__btn.chat-group-user__btn--remove.js-remove-btn="削除"
 
   .chat-group-form__field.clearfix
     .chat-group-form__field--left
