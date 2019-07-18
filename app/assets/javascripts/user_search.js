@@ -48,6 +48,6 @@ $(function() {
 
 $(function() {
   $('#user-search-result').on('click', '.user-search-add', function() {
-    
+    $('#user-search-result').empty();
   });
 });
