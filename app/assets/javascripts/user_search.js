@@ -30,7 +30,7 @@ $(function() {
     var lastInput = '';
     $.ajax({
       type: 'GET',
-      url: '/users/index',
+      url: '/users',
       data: { keyword: input },
       dataType: 'json'
     })
