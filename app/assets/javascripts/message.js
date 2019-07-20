@@ -54,9 +54,8 @@ $(function() {
   })
 
   var reloadMessages = function() {
-    group_id = $('.message:last').data('group-id');
-    console.log(group_id);
-    last_message_id = $('.message:last').data('id');
+    var last_message_id = $('.message:last').data('id');
+    var group_id = $('.message:last').data('group-id');
     $.ajax({
       url: `/groups/${group_id}/api/messages`,
       type: 'GET',
@@ -66,7 +65,6 @@ $(function() {
     .done(function(messages) {
       var insertHTML = '';
       messages.forEach(function(message) {
-        console.log(message);
         insertHTML += buildHTML(message);
         var html = insertHTML;
         $('.messages').append(html);
@@ -78,5 +76,8 @@ $(function() {
     })
   };
 
-  setInterval(reloadMessages, 5000);
+  var group_id = $('.message:last').data('group-id');
+  if (location.pathname == `/groups/${group_id}/messages`) {
+    setInterval(reloadMessages, 5000);
+  }
 });
