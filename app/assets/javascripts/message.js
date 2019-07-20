@@ -2,7 +2,7 @@ $(function() {
   function buildHTML(message) {
     var content = message.content ? `${message.content}` : "";
     var img = message.image ? `<img class="message__image" src=${message.image}>` : "";
-    var html = `<div class="message">
+    var html = `<div class="message" data-id="${message.id}">
                   <div class="message__upper-info">
                     <p class="message__upper-info__talker">
                       ${message.user_name}
@@ -18,57 +18,57 @@ $(function() {
                 </div>`
     return html;
   }
-  var buildMessageHTML = function(message) {
-    if (message.content && message.image.url) {
-      var html = `<div class="message" data-id="${message.id}">
-                    <div class="upper-message">
-                      <div class="upper-message__user-name">
-                        ${message.user_name}
-                      </div>
-                      <div class="upper-message__date">
-                        ${message.date}
-                      </div>
-                    </div>
-                    <div class="lower-message">
-                      <p class="lower-message__content">
-                        ${message.content}
-                      </p>
-                      <img src="${message.image.url}" class="lower-message__image">
-                    </div>
-                  </div>`
-    } else if (message.content) {
-      var html = `<div class="message" data-id=${message.id}>
-                    <div class="upper-message">
-                      <div class="upper-message__user-name">
-                        ${message.user_name}
-                      </div>
-                      <div class="upper-message__date">
-                        ${message.date}
-                      </div>
-                    </div>
-                    <div class="lower-message">
-                      <p class="lower-message__content">
-                        ${message.content}
-                      </p>
-                    </div>
-                  </div>`
-    } else if (message.image.url) {
-      var html = `<div class="message" data-id=${message.id}>
-                    <div class="upper-message">
-                      <div class="upper-message__user-name">
-                        ${message.user_name}
-                      </div>
-                      <div class="upper-message__date">
-                        ${message.date}
-                      </div>
-                    </div>
-                    <div class="lower-message">
-                      <img src="${message.image.url}" class="lower-message__image">
-                    </div>
-                  </div>`
-    };
-    return html;
-  };
+  // var buildMessageHTML = function(message) {
+  //   if (message.content && message.image.url) {
+  //     var html = `<div class="message" data-id="${message.id}">
+  //                   <div class="upper-message">
+  //                     <div class="upper-message__user-name">
+  //                       ${message.user_name}
+  //                     </div>
+  //                     <div class="upper-message__date">
+  //                       ${message.date}
+  //                     </div>
+  //                   </div>
+  //                   <div class="lower-message">
+  //                     <p class="lower-message__content">
+  //                       ${message.content}
+  //                     </p>
+  //                     <img src="${message.image.url}" class="lower-message__image">
+  //                   </div>
+  //                 </div>`
+  //   } else if (message.content) {
+  //     var html = `<div class="message" data-id=${message.id}>
+  //                   <div class="upper-message">
+  //                     <div class="upper-message__user-name">
+  //                       ${message.user_name}
+  //                     </div>
+  //                     <div class="upper-message__date">
+  //                       ${message.date}
+  //                     </div>
+  //                   </div>
+  //                   <div class="lower-message">
+  //                     <p class="lower-message__content">
+  //                       ${message.content}
+  //                     </p>
+  //                   </div>
+  //                 </div>`
+  //   } else if (message.image.url) {
+  //     var html = `<div class="message" data-id=${message.id}>
+  //                   <div class="upper-message">
+  //                     <div class="upper-message__user-name">
+  //                       ${message.user_name}
+  //                     </div>
+  //                     <div class="upper-message__date">
+  //                       ${message.date}
+  //                     </div>
+  //                   </div>
+  //                   <div class="lower-message">
+  //                     <img src="${message.image.url}" class="lower-message__image">
+  //                   </div>
+  //                 </div>`
+  //   };
+  //   return html;
+  // };
   function scrollBottom() {
     var target = $('.message').last();
     var position = target.offset().top + $('.messages').scrollTop();
@@ -103,6 +103,7 @@ $(function() {
   })
 
   var reloadMessages = function() {
+    var group_id = 1;
     last_message_id = $('.message:last').data('id');
     $.ajax({
       url: `/groups/${group_id}/api/messages`,
@@ -111,13 +112,14 @@ $(function() {
       data: { id: last_message_id }
     })
     .done(function(messages) {
-      var insertHTML = $('');
+      var insertHTML = '';
       messages.forEach(function(message) {
-        insertHTML.append(buildMessageHTML(message));
-        var html = insertHTML(message);
-        ('.messages').append(html);
+        console.log(message);
+        insertHTML += buildHTML(message);
+        var html = insertHTML;
+        $('.messages').append(html);
+        scrollBottom();
       });
-      scrollBottom();
     })
     .fail(function() {
       console.log('error');
