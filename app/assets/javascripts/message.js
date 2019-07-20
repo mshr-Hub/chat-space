@@ -117,9 +117,11 @@ $(function() {
         var html = insertHTML(message);
         ('.messages').append(html);
       });
+      scrollBottom();
     })
     .fail(function() {
       console.log('error');
     })
   };
+  setInterval(reloadMessages, 5000);
 });
