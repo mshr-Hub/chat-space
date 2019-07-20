@@ -2,7 +2,7 @@ $(function() {
   function buildHTML(message) {
     var content = message.content ? `${message.content}` : "";
     var img = message.image ? `<img class="message__image" src=${message.image}>` : "";
-    var html = `<div class="message" data-id="${message.id}" group-id="${message.group_id}">
+    var html = `<div class="message" data-id="${message.id}" data-group-id="${message.group_id}">
                   <div class="message__upper-info">
                     <p class="message__upper-info__talker">
                       ${message.user_name}
@@ -54,7 +54,8 @@ $(function() {
   })
 
   var reloadMessages = function() {
-    group_id = $('').data('group-id');
+    group_id = $('.message:last').data('group-id');
+    console.log(group_id);
     last_message_id = $('.message:last').data('id');
     $.ajax({
       url: `/groups/${group_id}/api/messages`,
@@ -70,10 +71,10 @@ $(function() {
         var html = insertHTML;
         $('.messages').append(html);
         scrollBottom();
-      });
+      })
     })
     .fail(function() {
-      console.log('error');
+      alert('error');
     })
   };
 
