@@ -27,31 +27,38 @@ $(function() {
     }, 300, 'swing');
   }
 
-  $('#new_message').on("submit", function(e) {
-    e.preventDefault();
-    var formData = new FormData(this);
-    var url = $(this).attr('action');
-    $.ajax({
-      url: url,
-      type: "POST",
-      data: formData,
-      dataType: 'json',
-      processData: false,
-      contentType: false
+  $(document).on('turbolinks:load', function (e) {
+    $('#new_message').on("submit", function(e) {
+      e.preventDefault();
+      var formData = new FormData(this);
+      var url = $(this).attr('action');
+      $.ajax({
+        url: url,
+        type: "POST",
+        data: formData,
+        dataType: 'json',
+        processData: false,
+        contentType: false
+      })
+      .done(function(data) {
+        var html = buildHTML(data);
+        $('.messages').append(html);
+        $('#new_message')[0].reset();
+        scrollBottom();
+      })
+      .fail(function(data) {
+        alert('メッセージを入力してください。');
+      })
+      .always(function(data) {
+        $('.submit-btn').prop('disabled', false);
+      })
     })
-    .done(function(data) {
-      var html = buildHTML(data);
-      $('.messages').append(html);
-      $('#new_message')[0].reset();
-      scrollBottom();
-    })
-    .fail(function(data) {
-      alert('メッセージを入力してください。');
-    })
-    .always(function(data) {
-      $('.submit-btn').prop('disabled', false);
-    })
-  })
+
+    var group_id = $('.message:last').data('group-id');
+    if (location.pathname == `/groups/${group_id}/messages`) {
+      setInterval(reloadMessages, 5000);
+    }
+  });
 
   var reloadMessages = function() {
     var last_message_id = $('.message:last').data('id');
@@ -76,8 +83,4 @@ $(function() {
     })
   };
 
-  var group_id = $('.message:last').data('group-id');
-  if (location.pathname == `/groups/${group_id}/messages`) {
-    setInterval(reloadMessages, 5000);
-  }
 });
