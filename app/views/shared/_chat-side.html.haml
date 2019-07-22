@@ -5,7 +5,7 @@
         = current_user.name
       %ul.side-header__box__menu
         %li.side-header__box__menu-new-group
-          = link_to new_group_path, {"data-turbolinks" => "false"} do
+          = link_to new_group_path do
             = fa_icon 'edit'
         %li.side-header__box__menu-edit-user
           = link_to edit_user_path(current_user) do
