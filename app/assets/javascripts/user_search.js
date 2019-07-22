@@ -54,14 +54,14 @@ $(function() {
         alert('ユーザー検索に失敗しました');
       })
     });
-    user_search_result.on('click', '.user-search-add', function(e) {
-      var user = $(e.currentTarget).data();
-      user_search_result.empty();
-      appendChatUser(user);
-    });
-    chat_group_users.on('click', '.user-search-remove', function(e) {
-      var remove_member = $(e.currentTarget).parent();
-      remove_member.remove();
-    });
+  });
+  user_search_result.on('click', '.user-search-add', function(e) {
+    var user = $(e.currentTarget).data();
+    user_search_result.empty();
+    appendChatUser(user);
+  });
+  chat_group_users.on('click', '.user-search-remove', function(e) {
+    var remove_member = $(e.currentTarget).parent();
+    remove_member.remove();
   });
 });
