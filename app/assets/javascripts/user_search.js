@@ -1,6 +1,6 @@
 $(function() {
 
-  $(document).on('turbolinks:load', function(){
+  $(document).on('turbolinks:change', function(){
 
     var user_search_result = $('#user-search-result');
     var chat_group_users = $('#chat-group-users');
