@@ -25,44 +25,42 @@ $(function() {
   chat_group_users.append(html);
   }
 
-  $(document).on('turbolinks:load', function(e) {
-    $('#user-search-field').on("keyup", function() {
-      var input = $('#user-search-field').val();
-      var lastInput = '';
-      $.ajax({
-        type: 'GET',
-        url: '/users',
-        data: { keyword: input },
-        dataType: 'json'
-      })
-      .done(function(users) {
-        user_search_result.empty();
-        if (lastInput !== input && users.length !== 0) {
-          users.forEach(function(user) {
-            appendUser(user);
-          });
-        }
-        else if (lastInput == input) {
-          user_search_result.empty();
-        }
-        else {
-          appendErrMsgToHTML("一致するユーザーが見つかりません");
-        }
-        lastInput == input;
-      })
-      .fail(function() {
-        alert('ユーザー検索に失敗しました');
-      })
-    });
-    user_search_result.on('click', '.user-search-add', function(e) {
-      var user = $(e.currentTarget).data();
+  $('#user-search-field').on("keyup", function() {
+    var input = $('#user-search-field').val();
+    var lastInput = '';
+    $.ajax({
+      type: 'GET',
+      url: '/users',
+      data: { keyword: input },
+      dataType: 'json'
+    })
+    .done(function(users) {
       user_search_result.empty();
-      appendChatUser(user);
-    });
-    chat_group_users.on('click', '.user-search-remove', function(e) {
-      var remove_member = $(e.currentTarget).parent();
-      remove_member.remove();
-    });
+      if (lastInput !== input && users.length !== 0) {
+        users.forEach(function(user) {
+          appendUser(user);
+        });
+      }
+      else if (lastInput == input) {
+        user_search_result.empty();
+      }
+      else {
+        appendErrMsgToHTML("一致するユーザーが見つかりません");
+      }
+      lastInput == input;
+    })
+    .fail(function() {
+      alert('ユーザー検索に失敗しました');
+    })
+  });
+  user_search_result.on('click', '.user-search-add', function(e) {
+    var user = $(e.currentTarget).data();
+    user_search_result.empty();
+    appendChatUser(user);
+  });
+  chat_group_users.on('click', '.user-search-remove', function(e) {
+    var remove_member = $(e.currentTarget).parent();
+    remove_member.remove();
   });
 
 });
