@@ -63,6 +63,6 @@ $(function() {
       var remove_member = $(e.currentTarget).parent();
       remove_member.remove();
     });
-  })
+  });
 
 });
